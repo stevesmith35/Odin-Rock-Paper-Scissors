@@ -1,36 +1,36 @@
 function playRound(playerSelection, computerSelection) {
     
-    if (playerSelection.toLowerCase() === 'rock') {
+    if (playerSelection === 'rock') {
         if (computerSelection === 'rock') {
-            console.log('You tied!');
+            return alert('You tied!');
         } else if (computerSelection === 'paper') {
             computerScore++;
-            console.log('Paper covers rock, you lose!');
+            return alert('Paper covers rock, you lose!');
         } else {
             playerScore++;
-            console.log('Rock breaks scissors, you win!');
+            return alert('Rock breaks scissors, you win!');
         }
 
-    } else if (playerSelection.toLowerCase() === 'paper') {
+    } else if (playerSelection === 'paper') {
         if (computerSelection === 'rock') {
             playerScore++;
-            console.log('Paper covers rock, you win!');
+            return alert('Paper covers rock, you win!');
         } else if (computerSelection === 'paper') {
-            console.log('You tied!');
+            return alert('You tied!');
         } else {
             computerScore++;
-            console.log('Scissors cut paper, you lose!');
+            return alert('Scissors cut paper, you lose!');
         }
 
-    } else if (playerSelection.toLowerCase() === 'scissors') {
+    } else if (playerSelection === 'scissors') {
         if (computerSelection === 'rock') {
             computerScore++;
-            console.log('Rock breaks scissors, you lose!');
+            return alert('Rock breaks scissors, you lose!');
         } else if (computerSelection === 'paper') {
             playerScore++;
-            console.log('Scissors cut paper, you win!');
+            return alert('Scissors cut paper, you win!');
         } else {
-            console.log('You tied!');
+            return alert('You tied!');
         }
     }
 
@@ -52,17 +52,22 @@ function computerPlay() {
 
 function game() {
 
-    let playerSelection = prompt("Please Enter: Rock, Paper or Scissors.");
+    let playerSelection = prompt("Please Enter: Rock, Paper or Scissors.").toLowerCase();
     let computerSelection = computerPlay();
+    
+    playRound(playerSelection, computerSelection);
+    // console.log(playRound());
 
     let isRunning = true;
     while(isRunning) {
+
+        console.log(playRound());
 
         let playAgain = prompt("Play again? (yes or no)");
         console.log(playAgain);
         if (playAgain.toLowerCase() === 'yes') {
             isRunning = true;
-            playerSelection = prompt("Please Enter: Rock, Paper or Scissors.");
+            playerSelection = prompt("Please Enter: Rock, Paper or Scissors.").toLowerCase();
             computerSelection = computerPlay();
             playRound(playerSelection, computerSelection)
             continue;
