@@ -33,9 +33,6 @@ function playRound(playerSelection, computerSelection) {
             return alert('You tied!');
         }
     }
-
-    console.log(`Player Score: ${playerScore}`);        
-    console.log(`Computer Score: ${computerScore}`);
   }
   
 function computerPlay() {
@@ -47,6 +44,22 @@ function computerPlay() {
         return 'paper';
     } else {
         return 'scissors';
+    }
+}
+
+function winner(playerScore, computerScore) {
+    if (playerScore > computerScore) {
+        return alert(`Congratulations, you won! 
+        \n Player Score: ${playerScore}
+        \n Computer Score: ${computerScore}`);
+    } else if (playerScore < computerScore){
+        return alert(`Sorry, you lost.
+        \n Player Score: ${playerScore}
+        \n Computer Score: ${computerScore}`);
+    } else {
+        return alert(`You tied the computer.
+        \n Player Score: ${playerScore}
+        \n Computer Score: ${computerScore}`);
     }
 }
 
@@ -74,8 +87,11 @@ function game() {
         } else {
             isRunning = false;
         } 
+
     }
+    winner(playerScore, computerScore);
 }
+
 
 let playerScore = 0;
 let computerScore = 0;
