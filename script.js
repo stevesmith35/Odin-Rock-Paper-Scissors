@@ -1,36 +1,61 @@
+const rock = document.getElementById('rock');
+const paper = document.getElementById('paper');
+const scissors = document.getElementById('scissors');
+const yes = document.getElementById('yes');
+const no = document.getElementById('no');
+const rockImg = document.getElementById('rock-img');
+const paperImg = document.getElementById('paper-img');
+const scissorsImg = document.getElementById('scissors-img');
+
+let choose = document.getElementById('choose');
+let header = document.getElementById('header');
+let vs = document.getElementById('vs');
+let player = document.getElementById('player');
+let computer = document.getElementById('computer');
+
+yes.style.display = "none";
+no.style.display = "none";
+let playerScoreDisplay = document.getElementById('player-score');
+let computerScoreDisplay = document.getElementById('computer-score');
+
+let playerScore = 0;
+let computerScore = 0;
+
 function playRound(playerSelection, computerSelection) {
-    
     if (playerSelection === 'rock') {
+        player.textContent = "Rock";
         if (computerSelection === 'rock') {
-            return alert('You tied!');
+            computer.textContent = "Rock";
         } else if (computerSelection === 'paper') {
             computerScore++;
-            return alert('Paper covers rock, you lose!');
+            computer.textContent = "Paper";
         } else {
             playerScore++;
-            return alert('Rock breaks scissors, you win!');
+            computer.textContent = "Scissors";
         }
 
     } else if (playerSelection === 'paper') {
+        player.textContent = "Paper";
         if (computerSelection === 'rock') {
             playerScore++;
-            return alert('Paper covers rock, you win!');
+            computer.textContent = "Rock";
         } else if (computerSelection === 'paper') {
-            return alert('You tied!');
+            computer.textContent = "Paper";
         } else {
             computerScore++;
-            return alert('Scissors cut paper, you lose!');
+            computer.textContent = "Scissors";
         }
 
     } else if (playerSelection === 'scissors') {
+        player.textContent = "Scissors";
         if (computerSelection === 'rock') {
             computerScore++;
-            return alert('Rock breaks scissors, you lose!');
+            computer.textContent = "Rock";
         } else if (computerSelection === 'paper') {
             playerScore++;
-            return alert('Scissors cut paper, you win!');
+            computer.textContent = "Paper";
         } else {
-            return alert('You tied!');
+            computer.textContent = "Scissors";
         }
     }
   }
@@ -47,52 +72,84 @@ function computerPlay() {
     }
 }
 
-function winner(playerScore, computerScore) {
-    if (playerScore > computerScore) {
-        return alert(`Congratulations, you won! 
-        \n Player Score: ${playerScore}
-        \n Computer Score: ${computerScore}`);
-    } else if (playerScore < computerScore){
-        return alert(`Sorry, you lost.
-        \n Player Score: ${playerScore}
-        \n Computer Score: ${computerScore}`);
-    } else {
-        return alert(`You tied the computer.
-        \n Player Score: ${playerScore}
-        \n Computer Score: ${computerScore}`);
+function rockSelection() {
+    return game('rock');
+}
+
+function paperSelection() {
+    return game('paper');
+}
+
+function scissorsSelection() {
+    return game('scissors');
+}
+
+function updateScore(playerScore, computerScore) {
+
+    playerScoreDisplay.textContent = `Player Score: ${playerScore}`;
+    computerScoreDisplay.textContent = `Computer Score: ${computerScore}`;
+}
+
+function gameOver() {
+    choose.textContent = "Do you want to play again?";
+    yes.style.display = "block";
+    no.style.display = "block";
+    rock.style.display = "none";
+    paper.style.display = "none";
+    scissors.style.display = "none"
+    yes.addEventListener('click', playAgain);
+    no.addEventListener('click', end);
+}
+
+function playAgain() {
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreDisplay.textContent = `Player Score: ${playerScore}`;
+    computerScoreDisplay.textContent = `Computer Score: ${computerScore}`;
+
+    yes.style.display = "none";
+    no.style.display = "none";
+    rock.style.display = "block";
+    paper.style.display = "block";
+    scissors.style.display = "block";
+
+    header.textContent = "Rock, Paper, Scissors";
+    header.style.color = "green";
+
+    choose.textContent = "Choose";
+    player.textContent = "Player";
+    computer.textContent = "Computer";
+}
+
+function end() {
+    header.textContent = "Rock, Paper, Scissors";
+    header.style.color = "green";
+
+    player.textContent = "Player";
+    computer.textContent = "Computer";
+
+    vs.style.fontSize = "4rem";
+    vs.style.color = "red";
+    vs.textContent = "Game Over!";
+}
+
+
+function game(playerChoice) { 
+    playRound(playerChoice, computerPlay());
+    updateScore(playerScore, computerScore);
+
+
+    if (playerScore >= 5) {
+        header.style.color = 'red';
+        header.textContent = "You Win!"
+        gameOver();
+    } else if (computerScore >= 5) {
+        header.style.color = 'red';
+        header.textContent = "The Computer Wins";
+        gameOver();
     }
 }
 
-function game() {
-
-    let playerSelection = prompt("Please Enter: Rock, Paper or Scissors.").toLowerCase();
-    let computerSelection = computerPlay();
-    
-    playRound(playerSelection, computerSelection);
-    // console.log(playRound());
-
-    let isRunning = true;
-    while(isRunning) {
-
-        console.log(playRound());
-
-        let playAgain = prompt("Play again? (yes or no)");
-        console.log(playAgain);
-        if (playAgain.toLowerCase() === 'yes') {
-            isRunning = true;
-            playerSelection = prompt("Please Enter: Rock, Paper or Scissors.").toLowerCase();
-            computerSelection = computerPlay();
-            playRound(playerSelection, computerSelection)
-            continue;
-        } else {
-            isRunning = false;
-        } 
-
-    }
-    winner(playerScore, computerScore);
-}
-
-
-let playerScore = 0;
-let computerScore = 0;
-game();
+rock.addEventListener('click', rockSelection);
+paper.addEventListener('click', paperSelection);
+scissors.addEventListener('click', scissorsSelection);
