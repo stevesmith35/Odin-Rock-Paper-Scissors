@@ -6,12 +6,18 @@ const no = document.getElementById('no');
 const rockImg = document.getElementById('rock-img');
 const paperImg = document.getElementById('paper-img');
 const scissorsImg = document.getElementById('scissors-img');
+let playerImg = document.getElementById('player-img');
+let computerImg = document.getElementById('computer-img');
 
 let choose = document.getElementById('choose');
 let header = document.getElementById('header');
 let vs = document.getElementById('vs');
 let player = document.getElementById('player');
 let computer = document.getElementById('computer');
+const pick = document.getElementById('pick');
+const pickC = document.getElementById('pickC');
+const scoreboard = document.getElementById('scoreboard');
+
 
 yes.style.display = "none";
 no.style.display = "none";
@@ -23,39 +29,39 @@ let computerScore = 0;
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === 'rock') {
-        player.textContent = "Rock";
+        playerImg.src = './images/rock.jpg';
         if (computerSelection === 'rock') {
-            computer.textContent = "Rock";
+            computerImg.src = './images/rock.jpg';
         } else if (computerSelection === 'paper') {
             computerScore++;
-            computer.textContent = "Paper";
+            computerImg.src = './images/paper.jpg';
         } else {
             playerScore++;
-            computer.textContent = "Scissors";
+            computerImg.src = './images/scissors.jpg';
         }
 
     } else if (playerSelection === 'paper') {
-        player.textContent = "Paper";
+        playerImg.src = './images/paper.jpg';
         if (computerSelection === 'rock') {
             playerScore++;
-            computer.textContent = "Rock";
+            computerImg.src = './images/rock.jpg';
         } else if (computerSelection === 'paper') {
-            computer.textContent = "Paper";
+            computerImg.src = './images/paper.jpg';
         } else {
             computerScore++;
-            computer.textContent = "Scissors";
+            computerImg.src = './images/scissors.jpg';
         }
 
     } else if (playerSelection === 'scissors') {
-        player.textContent = "Scissors";
+        playerImg.src = './images/scissors.jpg';
         if (computerSelection === 'rock') {
             computerScore++;
-            computer.textContent = "Rock";
+            computerImg.src = './images/rock.jpg';
         } else if (computerSelection === 'paper') {
             playerScore++;
-            computer.textContent = "Paper";
+            computerImg.src = './images/paper.jpg';
         } else {
-            computer.textContent = "Scissors";
+            computerImg.src = './images/scissors.jpg';
         }
     }
   }
@@ -116,18 +122,32 @@ function playAgain() {
     header.textContent = "Rock, Paper, Scissors";
     header.style.color = "green";
 
-    choose.textContent = "Choose";
-    player.textContent = "Player";
-    computer.textContent = "Computer";
+    choose.textContent = "Shoot";
+    playerImg.src = "";
+    computerImg.src = "";
 }
 
 function end() {
     header.textContent = "Rock, Paper, Scissors";
     header.style.color = "green";
 
+    rock.style.display = "none";
+    paper.style.display = "none";
+    scissors.style.display = "none"
+    yes.style.display = "none";
+    no.style.display = "none";
+    choose.style.display = "none";
+    computer.style.display = "none";
+    player.style.display = "none";
+    header.style.display = "none";
+    pick.style.display = "none";
+    pickC.style.display = "none";
+    scoreboard.style.display = "none";
+
     player.textContent = "Player";
     computer.textContent = "Computer";
 
+    vs.style.marginTop = "200px";
     vs.style.fontSize = "4rem";
     vs.style.color = "red";
     vs.textContent = "Game Over!";
