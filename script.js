@@ -158,7 +158,6 @@ function game(playerChoice) {
     playRound(playerChoice, computerPlay());
     updateScore(playerScore, computerScore);
 
-
     if (playerScore >= 5) {
         header.style.color = 'red';
         header.textContent = "You Win!"

@@ -24,7 +24,7 @@ h1 {
     width: 250px;
     margin-right: auto;
     margin-left: auto;
-    margin-bottom: 50px;
+    margin-bottom: 15px;
     color: blue;
 }
 
@@ -34,6 +34,14 @@ h1 {
 
 #computer-score {
     margin: 20px 5px 10px 5px;
+}
+
+#conditions {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 2rem;
+    font-weight: 600;
+    color: purple;
 }
 
 #game-window {
